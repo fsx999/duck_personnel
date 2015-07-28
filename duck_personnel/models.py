@@ -29,9 +29,14 @@ class Personnel(MPTTModel):
     prenom = models.CharField('Prénom', max_length=30)
     fonction = models.ForeignKey(Fonction)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
-    email = models.EmailField(null=True)
+    email = models.EmailField(null=True, blank=True)
     phone = models.CharField("Téléphone", null=True, max_length=10)
     user = models.ForeignKey(User, null=True, blank=True)
 
     def __str__(self):
         return "{} {} {}".format(self.nom, self.prenom, self.fonction)
+
+    def save(self, *args, **kwargs):
+        if not self.email and self.user and self.user.email:
+            self.email = self.user.email
+        super(Personnel, self).save(*args, **kwargs)
