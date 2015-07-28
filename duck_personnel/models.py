@@ -31,7 +31,7 @@ class Personnel(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
     email = models.EmailField(null=True)
     phone = models.CharField("Téléphone", null=True, max_length=10)
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User, null=True, blank=True)
 
     def __str__(self):
         return "{} {} {}".format(self.nom, self.prenom, self.fonction)
