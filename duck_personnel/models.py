@@ -1,5 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
+from django.contrib.auth.models import User
 from django.utils.six import python_2_unicode_compatible
 
 __author__ = 'paulguichon'
@@ -30,6 +31,9 @@ class Personnel(MPTTModel):
     prenom = models.CharField('Prénom', max_length=30)
     fonction = models.ForeignKey(Fonction)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+    email = models.EmailField(null=True)
+    phone = models.CharField("Téléphone", null=True, max_length=10)
+    user = models.ForeignKey(User, null=True)
 
     def __str__(self):
         return "{} {} {}".format(self.nom, self.prenom, self.fonction)

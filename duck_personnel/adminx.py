@@ -5,7 +5,6 @@ import xadmin
 
 class PersonnelAdmin(object):
     object_list_template = 'admin/model_list.html'
-    pass
 
 
 xadmin.site.register(Personnel, PersonnelAdmin)
