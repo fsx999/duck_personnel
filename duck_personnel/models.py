@@ -4,7 +4,7 @@ from django.utils.six import python_2_unicode_compatible
 
 __author__ = 'paulguichon'
 from django.db import models
-from treebeard.mp_tree import MP_Node
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 @python_2_unicode_compatible
@@ -25,10 +25,11 @@ class Fonction(models.Model):
 
 
 @python_2_unicode_compatible
-class Personnel(MP_Node):
+class Personnel(MPTTModel):
     nom = models.CharField('Nom', max_length=30)
     prenom = models.CharField('Prénom', max_length=30)
     fonction = models.ForeignKey(Fonction)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
 
     def __str__(self):
         return "{} {} {}".format(self.nom, self.prenom, self.fonction)

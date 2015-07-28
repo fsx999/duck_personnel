@@ -8,8 +8,17 @@
 <style type="text/css">
   .btn-toolbar{margin-top: 0;}
   #content-block.full-content{margin-left: 0;}
+
 </style>
-    {% treebeard_css %}
+<link rel="stylesheet" href="{% static 'django_mptt_admin/jqtree/jqtree.css' %}">
+        <link rel="stylesheet" href="{% static 'django_mptt_admin/django_mptt_admin.css' %}">
+{% endblock %}
+{% block extrahead %}
+           <script src="{% static 'django_mptt_admin/jquery/dist/jquery.min.js' %}"></script>
+    <!--<![endif]-->
+    <script src="{% static 'django_mptt_admin/jquery-cookie/jquery.cookie.js' %}"></script>
+    <script src="{% static 'django_mptt_admin/jqtree/tree.jquery.js' %}"></script>
+    <script src="{% static 'django_mptt_admin/django_mptt_admin.js' %}"></script>
 {% endblock %}
 {% block bodyclass %}change-list{% endblock %}
 
@@ -80,70 +89,21 @@
   <div class="results table-responsive">
   {% if results %}
   {% block results_grid %}
-  <table class="table table-bordered table-striped table-hover">
-    {% block results_grid_head %}
-    <thead>
-      <tr>{% for o in result_headers.cells %}
-        <th {{o.tagattrs}}>
-          {% if o.btns %}
-            <div class="pull-right">
-              {% for b in o.btns %}
-                {{b|safe}}
-              {% endfor %}
+    <div id="changelist" class="module">
+        <form action="" id="changelist-form" method="post">
+            {% csrf_token %}
+            <div id="tree" class="" data-rtl="" data-label-error="Error while loading the data from the server"
+                 data-label-move-failed="move failed" data-label-edit="edit" data-autoescape="true" data-auto_open="1"
+                 data-save_state="duck_personnel_personnel"
+{#                 data-url="/admin/duck_personnel/personnel/tree_json/">#}
+                 data-url="{% url 'admin:duck_personnel_personnel_tree_json' %}">
+
             </div>
-          {% endif %}
-          {% if o.menus %}
-            <div class="dropdown pull-left">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                {{ o.label }}
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                {% for m in o.menus %}
-                  {{m|safe}}
-                {% endfor %}
-              </ul>
-            </div>
-          {% else %}
-            {{ o.label }}
-          {% endif %}
-        </th>{% endfor %}
-      </tr>
-      {% view_block 'result_head' %}
-    </thead>
-    {% endblock results_grid_head %}
-    {% block results_grid_body %}
-    <tbody>
-    {% for row in results %}
-      <tr class="grid-item{% if row.css_class %} {{row.css_class}}{%endif%}">{% for o in row.cells %}
-        <td {{o.tagattrs}}>
-          {% if o.btns %}
-            <div class="btn-group pull-right">
-              {% for b in o.btns %}
-                {{b|safe}}
-              {% endfor %}
-            </div>
-          {% endif %}
-          {% if o.menus %}
-            <div class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                {{ o.label }}
-              </a>
-              <ul class="dropdown-menu">
-                {% for m in o.menus %}
-                  {{m|safe}}
-                {% endfor %}
-              </ul>
-            </div>
-          {% else %}
-            {{ o.label }}
-          {% endif %}
-        </td>
-      {% endfor %}</tr>
-      {% view_block 'result_row' row %}
-    {% endfor %}
-    </tbody>
-    {% endblock results_grid_body %}
-  </table>
+        </form>
+    </div>
+
+
+
   {% endblock results_grid %}
   {% else %}
     <p class="well">{% trans "Empty list" %}</p>
