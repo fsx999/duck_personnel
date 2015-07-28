@@ -1,0 +1,21 @@
+<div class="sitemap">
+<ul id="primaryNav" class="col{{ personne.get_children.count }}">
+ <li id="home"><a href="#"> {{ personne }}</a></li>
+{% for personne in personne.get_children %}
+    <li>
+        <a href="#"> {{ personne }}</a>
+    </li>
+{% endfor %}
+</ul>
+</div>
+<div>
+{% for personne in personne.get_children %}
+
+{% if not personne.is_leaf_node %}
+
+            {% include  "admin/tree.html" with personne=personne %}
+
+
+    {% endif %}
+{% endfor %}
+</div>
