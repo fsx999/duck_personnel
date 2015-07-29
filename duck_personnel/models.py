@@ -7,8 +7,9 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 @python_2_unicode_compatible
-class Service(models.Model):
+class Service(MPTTModel):
     label = models.CharField('Service', max_length=120)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
 
     def __str__(self):
         return self.label
@@ -17,6 +18,8 @@ class Service(models.Model):
 @python_2_unicode_compatible
 class Fonction(models.Model):
     label = models.CharField('Fonction', max_length=120)
+    code = models.CharField('Code Employee', max_length=1, choices=(('R', 'Responsable'),
+                                                                    ('E', 'Normale')))
     service = models.ForeignKey(Service)
 
     def __str__(self):
