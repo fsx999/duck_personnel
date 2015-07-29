@@ -23,6 +23,10 @@ class PersonnelAdmin(DjangoMpttAdmin):
         return util.get_tree_from_queryset(qs, handle_create_node, max_level)
 
 
+class ServiceAdmin(DjangoMpttAdmin):
+    pass
+
+
 admin.site.register(Personnel, PersonnelAdmin)
-admin.site.register(Service)
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(Fonction)

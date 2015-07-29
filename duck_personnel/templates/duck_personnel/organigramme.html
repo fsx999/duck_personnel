@@ -2,18 +2,36 @@
 {% load lib_inscription static%}
 {% block extrastyle %}
     {{ block.super }}
-    <link href="{% static 'SlickmapCSS/slickmap.css' %}" media="screen" type="text/css" rel="stylesheet">
+    <script src="{% static "angular/angular.js" %}"></script>
+    <script src="{% static "personnel/app/js/controller.js" %}"></script>
 {% endblock %}
 {% block nav_title %}Annuaire IED{% endblock %}
 {% block content %}
+{% verbatim %}
 
-        {% for personne in personnes %}
+<div ng-app="personnelApp">
+    <div class="container-fluid">
+    <div ng-controller="ServiceListCtrl">
+
+          <div class="row">
+            <div class="col-md-2">
+             Recherche : <input ng-model="query">
+            </div>
+
+            <div class="col-md-10">
+            <ul>
+            <li ng-repeat="service in services | filter:query">{{ service.label }} </li>
+        </ul>
+                </div>
+            </div>
+    </div>
+    <div>
+
+</div>
 
 
-            {% include  "admin/tree.html" with personne=personne %}
+{% endverbatim %}
 
-
-        {% endfor %}
 
 
 {#		<h1>Project Title</h1>#}
