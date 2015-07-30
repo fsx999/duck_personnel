@@ -1,19 +1,23 @@
 <div class="container-fluid">
 
+        <div class="well">
 
-        <div class="row">
-            <div class="col-md-2">
                 Recherche : <input ng-model="query">
-            </div>
 
-            <div class="col-md-10">
+        </div>
+
+
+        <div class="panel panel-primary" ng-repeat="s in services">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ s.label }}</h3>
+            </div>
+            <div class="panel-body">
                 <ul>
-                    <li ng-repeat="service in services">{{ service.label }}
-                        <ul>
-                            <li ng-repeat="personne in personnelList(service.id).personnes | filter:query">{{ personne }}
+                            <li ng-repeat="personne in s.personnes|filter:query">
+                                {{ personne.nom }}
+                                {{ personne.prenom }} :   {{ personne.phone }}
+                            </li>
                         </ul>
-                    </li>
-                </ul>
             </div>
         </div>
 <div>

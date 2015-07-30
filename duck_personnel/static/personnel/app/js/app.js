@@ -4,7 +4,8 @@
 var personnelApp = angular.module('personnelApp', [
     'ngRoute',
     'servicesControlers',
-    'servicesServices'
+    'servicesServices',
+    'ui.bootstrap'
 ]);
 
 personnelApp.config(['$routeProvider',

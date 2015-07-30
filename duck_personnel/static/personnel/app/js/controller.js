@@ -4,13 +4,18 @@
 
 var servicesControlers = angular.module('servicesControlers', []);
 
-servicesControlers.controller('ServiceListCtrl', ['$scope', '$http', '$q', 'Service',
-    function ($scope, $http, $q, Service) {
+servicesControlers.controller('ServiceListCtrl', ['$scope', '$http', '$q', 'Service', 'Personnel',
+    function ($scope, $http, $q, Service, Personnel) {
 
-        $scope.services = Service.query();
-        $scope.service = Service
+        Service.query(function(data){
+            $scope.services = data;
 
+            for (index = 0, len = data.length; index < len; ++index) {
+                s = data[index];
+                 Personnel.personne_by_service(s);
 
-
+            }
+            console.log($scope.services);
+        });
 
     }]);
