@@ -2,13 +2,15 @@
  * Created by paulguichon on 29/07/2015.
  */
 
-var personnelApp = angular.module('personnelApp', []);
+var servicesControlers = angular.module('servicesControlers', []);
 
-personnelApp.controller('ServiceListCtrl', ['$scope', '$http',
-    function($scope, $http){
-    $http.get('/personnel/services/').success(function(data){
-         $scope.services = data;
-    });
+servicesControlers.controller('ServiceListCtrl', ['$scope', '$http', '$q', 'Service',
+    function ($scope, $http, $q, Service) {
+
+        $scope.services = Service.query();
+        $scope.service = Service
 
 
-}]);
+
+
+    }]);

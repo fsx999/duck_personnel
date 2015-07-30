@@ -37,6 +37,10 @@ class Personnel(MPTTModel):
     bureau = models.CharField(max_length=10, null=True, blank=True)
     user = models.ForeignKey(User, null=True, blank=True)
 
+    @property
+    def fonction__service(self):
+        return self.fonction.service.pk
+
     def __str__(self):
         return "{} {} {}".format(self.nom, self.prenom, self.fonction)
 
