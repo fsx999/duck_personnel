@@ -14,8 +14,8 @@
             <div class="panel-body">
                 <ul>
                             <li ng-repeat="personne in s.personnes|filter:query">
-                                {{ personne.nom }}
-                                {{ personne.prenom }} :   {{ personne.phone }}
+                               {{ personne.fonction_name }} <a  ng-click="open(personne.id)"> {{ personne.nom }} {{ personne.prenom }}</a>
+                                  :   {{ personne.phone }}
                             </li>
                         </ul>
             </div>

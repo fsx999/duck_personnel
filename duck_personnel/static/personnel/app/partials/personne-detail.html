@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3 class="modal-title">Information</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li>Fonction : {{ personne.fonction_name }}</li>
+        <li>Nom : {{ personne.nom }}</li>
+        <li>Prenom : {{ personne.prenom }}</li>
+        <li>Email : {{ personne.email }}</li>
+        <li>Téléphone : {{ personne.phone }}</li>
+        <li>Bureau : {{ personne.bureau }}</li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div>

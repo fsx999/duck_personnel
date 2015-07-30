@@ -22,8 +22,10 @@ class PersonnelSerizalizer(serializers.ModelSerializer):
     class Meta:
         model = Personnel
         fields = ('fonction__service',
+                  'id',
                    'nom' ,
                     'prenom',
                     'email',
                     'phone',
-                    'bureau',)
+                    'bureau',
+                  'fonction_name')

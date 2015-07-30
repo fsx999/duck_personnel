@@ -41,6 +41,10 @@ class Personnel(MPTTModel):
     def fonction__service(self):
         return self.fonction.service.pk
 
+    @property
+    def fonction_name(self):
+        return self.fonction.label
+
     def __str__(self):
         return "{} {} {}".format(self.nom, self.prenom, self.fonction)
 
