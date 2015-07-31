@@ -30,7 +30,7 @@ class Fonction(models.Model):
 class Personnel(MPTTModel):
     nom = models.CharField('Nom', max_length=30)
     prenom = models.CharField('Prénom', max_length=30)
-    fonction = models.ForeignKey(Fonction)
+    fonction = models.ManyToManyField(Fonction, null=True)
     fonction_save = models.ForeignKey(Fonction, null=True, related_name='fonctions_save')
     service = models.ForeignKey(Service, null=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
