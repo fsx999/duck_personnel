@@ -20,10 +20,9 @@ class Fonction(models.Model):
     label = models.CharField('Fonction', max_length=120)
     code = models.CharField('Code Employee', max_length=1, choices=(('R', 'Responsable'),
                                                                     ('E', 'Normale')))
-    service = models.ForeignKey(Service)
 
     def __str__(self):
-        return "{} {}".format(self.label, self.service)
+        return self.label
 
 
 @python_2_unicode_compatible
@@ -31,7 +30,6 @@ class Personnel(MPTTModel):
     nom = models.CharField('Nom', max_length=30)
     prenom = models.CharField('Prénom', max_length=30)
     fonction = models.ManyToManyField(Fonction, null=True)
-    fonction_save = models.ForeignKey(Fonction, null=True, related_name='fonctions_save')
     service = models.ForeignKey(Service, null=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
     email = models.EmailField(null=True, blank=True)
@@ -41,7 +39,7 @@ class Personnel(MPTTModel):
 
     @property
     def fonction__service(self):
-        return self.fonction.service.pk
+        return self.service.pk
 
     @property
     def fonction_name(self):
