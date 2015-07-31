@@ -31,6 +31,8 @@ class Personnel(MPTTModel):
     nom = models.CharField('Nom', max_length=30)
     prenom = models.CharField('Prénom', max_length=30)
     fonction = models.ForeignKey(Fonction)
+    fonction_save = models.ForeignKey(Fonction, null=True, related_name='fonctions_save')
+    service = models.ForeignKey(Service, null=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
     email = models.EmailField(null=True, blank=True)
     phone = models.CharField("Téléphone", null=True, max_length=10, blank=True)
