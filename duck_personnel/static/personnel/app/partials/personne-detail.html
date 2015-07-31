@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
     <ul>
-        <li>Fonction : {{ personne.fonction_name }}</li>
+        <li>Fonction : <span ng-repeat="name in personne.fonction_name_list">{{ name }}</span></li>
         <li>Nom : {{ personne.nom }}</li>
         <li>Prenom : {{ personne.prenom }}</li>
         <li>Email : {{ personne.email }}</li>
@@ -13,4 +13,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-primary" ng-if="personne.can_edit" ng-click="edit()">Edit</button>
 </div>

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.six import python_2_unicode_compatible
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+from django.contrib.auth.models import Group
 
 
 @python_2_unicode_compatible
@@ -21,8 +22,10 @@ class Fonction(models.Model):
     code = models.CharField('Code Employee', max_length=1, choices=(('R', 'Responsable'),
                                                                     ('E', 'Normale')))
 
+    groups_permissions = models.ManyToManyField(Group)
+
     def __str__(self):
-        return self.label
+        return "{} {}".format(self.label, self.service.label)
 
 
 @python_2_unicode_compatible
@@ -37,16 +40,14 @@ class Personnel(MPTTModel):
     bureau = models.CharField(max_length=10, null=True, blank=True)
     user = models.ForeignKey(User, null=True, blank=True)
 
-    @property
-    def fonction__service(self):
-        return self.service.pk
 
     @property
-    def fonction_name(self):
-        return self.fonction.label
+    def fonction_name_list(self):
+        return [x.label for x in self.fonction.all()]
+        # return self.fonction.values_list('label', flat=True)
 
     def __str__(self):
-        return "{} {} {}".format(self.nom, self.prenom, self.fonction)
+        return "{} {}".format(self.nom, self.prenom)
 
     def save(self, *args, **kwargs):
         if not self.email and self.user and self.user.email:

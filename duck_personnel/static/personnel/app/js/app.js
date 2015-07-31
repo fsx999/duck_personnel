@@ -8,8 +8,8 @@ var personnelApp = angular.module('personnelApp', [
     'ui.bootstrap'
 ]);
 
-personnelApp.config(['$routeProvider',
-    function ($routeProvider) {
+personnelApp.config(['$routeProvider', '$httpProvider',
+    function ($routeProvider, $httpProvider) {
         $routeProvider.
             when('/services', {
                 templateUrl: '/static/personnel/app/partials/services-list.html',
@@ -22,4 +22,6 @@ personnelApp.config(['$routeProvider',
             otherwise({
                 redirectTo: '/services'
             });
+        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     }]);
