@@ -43,7 +43,7 @@ servicesControlers.controller('PersonneCtrl', ['$scope',  '$modalInstance', '$mo
         $scope.edit = function () {
             $modalInstance.close();
             var modalInstance = $modal.open({
-                animation: true,
+                animation: false,
                 templateUrl: '/static/personnel/app/partials/personne-update.html',
                 controller: 'PersonneUpdateCtrl',
                 size: 'sm',
@@ -66,8 +66,6 @@ servicesControlers.controller('PersonneUpdateCtrl', ['$scope',  '$modalInstance'
             Personnel.personne_ressource().update(personne, function(data){
                 $scope.message = {type: 'success', message: 'Dossier bien modifié'}
             });
-
-
         };
 
         $scope.quit = function () {
