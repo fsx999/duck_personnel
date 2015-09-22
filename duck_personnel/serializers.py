@@ -37,3 +37,4 @@ class PersonnelSerizalizer(serializers.ModelSerializer):
                   'bureau',
                   'fonction_name_list'
                   )
+
