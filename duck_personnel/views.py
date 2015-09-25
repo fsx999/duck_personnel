@@ -11,11 +11,13 @@ __author__ = 'paulguichon'
 class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerizalizer
+    permission_classes = [permissions.AllowAny]
 
 
 class FonctionViewSet(viewsets.ModelViewSet):
     queryset = Fonction.objects.all()
     serializer_class = FonctionSerizalizer
+    permission_classes = [permissions.AllowAny]
 
 
 class PersonnelViewSet(viewsets.ModelViewSet):
