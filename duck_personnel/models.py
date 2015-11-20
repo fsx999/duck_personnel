@@ -46,6 +46,19 @@ class Personnel(MPTTModel):
         return [x.label for x in self.fonction.all()]
         # return self.fonction.values_list('label', flat=True)
 
+    @property
+    def get_fields_list(self):
+        fonctions = ', '.join(self.fonction_name_list)
+        return [
+                self.nom,
+                self.prenom,
+                self.service.label,
+                self.email,
+                self.phone,
+                self.bureau,
+                fonctions,
+        ]
+
     def __str__(self):
         return "{} {}".format(self.nom, self.prenom)
 
@@ -53,3 +66,4 @@ class Personnel(MPTTModel):
         if not self.email and self.user and self.user.email:
             self.email = self.user.email
         super(Personnel, self).save(*args, **kwargs)
+

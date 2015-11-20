@@ -14,7 +14,10 @@
 {% block content %}
 
 <div ng-app="personnelApp">
-
+    <div class="well">
+        <a href="{% url 'duck_personnel_download' %}?type=csv" class="btn btn-primary">Telecharger CSV</a>
+        <a href="{% url 'duck_personnel_download' %}?type=xls" class="btn btn-primary">Telecharger XLS</a>
+    </div>
     <div ng-view></div>
 </div>
 

@@ -21,9 +21,7 @@ class PersonnelSerizalizer(serializers.ModelSerializer):
     can_edit = serializers.SerializerMethodField('is_edit')
 
     def is_edit(self, personne):
-        if self.context['request'].user.is_authenticated() and self.context['request'].user.is_superuser:
-            return True
-        return False
+        return self.context['request'].user.is_authenticated() and self.context['request'].user.is_superuser or False
 
     class Meta:
         model = Personnel

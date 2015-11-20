@@ -13,4 +13,5 @@ router.register(r'personnels', views.PersonnelViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^download$', views.ExportFile.as_view(), name='duck_personnel_download')
 ]
