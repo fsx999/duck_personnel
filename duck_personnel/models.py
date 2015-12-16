@@ -25,7 +25,7 @@ class Fonction(models.Model):
     groups_permissions = models.ManyToManyField(Group)
 
     def __str__(self):
-        return "{} {}".format(self.label, self.service.label)
+        return "{}".format(self.label)
 
 
 @python_2_unicode_compatible
