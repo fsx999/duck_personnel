@@ -32,3 +32,9 @@ class DuckPersonnel(AppConfig):
         "groups_permissions": [],  # facultatif
         "permissions": [],  # facultatif
     }, ]
+
+    def ready(self):
+        from django.conf.urls import url, include
+        self.urls = [
+            url(r'^recruitment/', include('duck_recruitment.urls'))
+        ]
